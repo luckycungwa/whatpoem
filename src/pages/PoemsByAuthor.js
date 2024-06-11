@@ -1,4 +1,3 @@
-// pages/PoemsByAuthor.js
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getPoemsByAuthor } from "../services/api";
@@ -27,7 +26,7 @@ const PoemsByAuthor = () => {
     <>
     <div className="container mx-auto">
         {/* Sticky header with author name */}
-        <div className="sticky top-0 bg-danger w-full h-auto py-2 z-10 text-white shadow-lg">
+        <div className="sticky top-0 bg-black/90  w-full h-auto py-2 z-10 text-white shadow-lg">
           <h1 className="text-3xl font-bold text-center">Poems by</h1>
           <p className="text-center">{author}</p>
         </div>
@@ -43,7 +42,7 @@ const PoemsByAuthor = () => {
           <Button
             isIconOnly
             color="danger"
-            className="w-12 h-12 shadow-md"
+            className="w-12 h-12 shadow-md bg-black/90 "
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           >
             <MdArrowUpward size={24} />

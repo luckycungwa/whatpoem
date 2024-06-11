@@ -8,3 +8,12 @@
     top: 0;
     z-index: 1;
 }
+
+/* change div background color */
+
+
+.poemText{
+  color: black;
+ filter: invert(1);
+ mix-blend-mode: difference;
+}

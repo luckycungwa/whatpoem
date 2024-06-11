@@ -24,32 +24,37 @@ const Home = () => {
   
   return (
     <>
-      <Card className="mx-auto px-4 py-6" radius="md">
+      <div className="mx-auto px-4 py-6 bg-gray justify-center align-center">
        
-        <div className="z-1 flex w-full flex-col justify-center md:px-60">
-          <Tabs aria-label="Dynamic tabs">
+        <div id="theme-bg" className="flex w-full flex-col justify-center">
+          <Tabs aria-label="Dynamic tabs" >
             <Tab
               title="Poems"
-              className="gap-8 grid grid-cols-1 sm:grid-cols-5 md:grid-cols-4"
+              className=""
+              
             >
+            <div className="flex flex-col w-full h-full gap-4">
               {poems.map((poem, index) => (
                 <PoemCard key={index} poem={poem} />
+                
               ))}
               <Button className="w-full" onClick={() => setPoems([...poems, ...poems])}>
                 Load more
               </Button>
+              </div>
             </Tab>
+            
             <Tab title="Authors">
               <AuthorsList />
             </Tab>
           </Tabs>
         </div>
         <div className=" flex w-auto h-dvh justify-end absolute">
-          <Button isIconOnly  color="danger" className="z-55 fixed w-12 h-12 bottom-9 right-0 mr-5 shadow-md" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-            <MdArrowUpward size={24} />
+          <Button isIconOnly className="z-55 fixed w-12 h-12 bottom-9 right-0 mr-5 shadow-md bg-black/90 " onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+            <MdArrowUpward color="white" size={24} />
           </Button>
         </div>
-      </Card>
+      </div>
     </>
   );
 };

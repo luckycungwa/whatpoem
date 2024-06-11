@@ -1,6 +1,6 @@
-// App.js (or your main router file)
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./App.css";
 import Home from "./pages/Home";
 import PoemsByAuthor from "./pages/PoemsByAuthor";
 import Poem from "./pages/Poem";
