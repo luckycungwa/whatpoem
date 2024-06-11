@@ -68,7 +68,6 @@ const SettingsModal = () => {
                       <div className="flex flex-col w-full gap-2 pb-4 m-0 ">
                         <div className="flex flex-row justify-between  items-center h-10">
                           Theme
-                          
                           <p>{tempTheme}</p>
                           <ThemeSwitch
                             isSelected={tempTheme === "dark"}

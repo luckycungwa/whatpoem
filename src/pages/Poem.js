@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getPoemByTitle } from "../services/api";
 import {
   Button,
@@ -110,8 +110,8 @@ const Poem = () => {
         <Tab key="writing" title="Reviews">
           <p>Reviews</p>
         </Tab>
-        <Tab key="settings" title="">
-          <SettingsModal />
+        <Tab key="settings" title={ <SettingsModal />}>
+         
         </Tab>
       </Tabs>
       {/* button to scroll smoothly to the top */}
