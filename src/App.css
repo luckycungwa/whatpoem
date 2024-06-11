@@ -3,3 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
+.topSticky {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
