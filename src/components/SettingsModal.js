@@ -13,14 +13,14 @@ import { MdSettings } from "react-icons/md";
 import { useSettings } from "../contexts/SettingsContext";
 import ThemeSwitch from "./ThemeSwitch"
 
-const SettingsModal = () => {
+const SettingsModal = ({onPress}) => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { font, setFont, background, setBackground, theme, setTheme } = useSettings();
 
   const [tempFont, setTempFont] = useState(font);
   const [tempBackground, setTempBackground] = useState(background);
   const [tempTheme, setTempTheme] = useState(theme);
-
+// controlled settings
   const fonts = ["Poppins", "Montserrat", "Bellota", "Oswald", "Cormorant Garamond", "Bacasime Antique"];
   const backgrounds = ["#F9F5F6", "#3F4E4F", "#D2E0FB", "#363333", "#D0E7D2", "#1B262C"];
 
@@ -33,7 +33,7 @@ const SettingsModal = () => {
     setFont(tempFont);
     setBackground(tempBackground);
     onOpenChange(false);
-    // check if theme is light or dark. if dark change background color too or else change background to light unless background color is selected.
+    // check if theme is light or dark. if dark change background color too or else change background to light unless background color is selected || complex might cancel
     if (tempTheme === "dark") {
       document.body.style.backgroundColor = tempBackground;
     } else {
@@ -41,7 +41,7 @@ const SettingsModal = () => {
     }
 
   };
-
+// discard chamges
   const handleCancel = () => {
     setTempFont(font);
     setTempBackground(background);
@@ -52,9 +52,11 @@ const SettingsModal = () => {
   return (
     <>
       <div>
+      {/* activate modal || using a pseudo-button */}
         <Button isIconOnly onPress={onOpen} color="none">
           <MdSettings size={24} />
         </Button>
+        {/* render modal */}
         <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
           <ModalContent className="px-0 my-2">
             {(onClose) => (
@@ -66,6 +68,7 @@ const SettingsModal = () => {
                   <div className="flex flex-col ">
                     <div className="flex flex-row justify-between">
                       <div className="flex flex-col w-full gap-2 pb-4 m-0 ">
+                      {/* Theme Settings */}
                         <div className="flex flex-row justify-between  items-center h-10">
                           Theme
                           <p>{tempTheme}</p>
@@ -76,6 +79,7 @@ const SettingsModal = () => {
                             }
                           />
                         </div>
+                        {/* Background settings */}
                         <div className="flex flex-row justify-between items-center h-10">
                           Background
                           <div className="flex flex-row gap-2">
@@ -89,6 +93,7 @@ const SettingsModal = () => {
                             ))}
                           </div>
                         </div>
+                        {/* Font setings */}
                         <div className="flex flex-row justify-between items-center h-10">
                           Font
                           <div className="flex flex-row gap-2">
@@ -110,6 +115,7 @@ const SettingsModal = () => {
                 </ModalBody>
                 <Divider className="px-8" />
                 <ModalFooter>
+                {/* Apply or cancel buttons */}
                   <Button color="danger" variant="light" onPress={handleCancel}>
                     Cancel
                   </Button>

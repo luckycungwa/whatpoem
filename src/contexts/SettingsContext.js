@@ -8,7 +8,10 @@ export const SettingsProvider = ({ children }) => {
   const [theme, setTheme] = useState("");
 
   return (
-    <SettingsContext.Provider value={{ font, setFont, background, setBackground, theme, setTheme }}>
+    // Global State management
+    <SettingsContext.Provider
+      value={{ font, setFont, background, setBackground, theme, setTheme }}
+    >
       {children}
     </SettingsContext.Provider>
   );

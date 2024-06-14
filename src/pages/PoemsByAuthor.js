@@ -28,8 +28,9 @@ const PoemsByAuthor = () => {
         {/* Sticky header with author name */}
         <div className="sticky top-0 bg-black/90  w-full h-auto py-2 z-10 text-white shadow-lg">
           <h1 className="text-3xl font-bold text-center">Poems by</h1>
-          <p className="text-center">{author}</p>
+          <p className="text-center text-md">{author}</p>
         </div>
+        {/* List of poems by author */}
         <Card className="mx-auto px-4 py-8" radius="md">
           <div className="gap-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {poems.map((poem, index) => (

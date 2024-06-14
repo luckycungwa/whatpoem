@@ -8,16 +8,27 @@ import {
   Divider,
   Tab,
   Tabs,
+  useDisclosure,
 } from "@nextui-org/react";
-import { MdArrowBack, MdArrowUpward, MdSettings } from "react-icons/md";
+import {
+  MdArrowBack,
+  MdArrowUpward,
+  MdBookmarkAdd,
+  MdBookmarkBorder,
+  MdSave,
+  MdSettings,
+} from "react-icons/md";
 import SettingsModal from "../components/SettingsModal";
 import { useSettings } from "../contexts/SettingsContext";
+import ShareButton from "../components/ShareButton";
+import WriteReviewModal from "../components/WriteReviewModal";
 
 const Poem = () => {
   const { title } = useParams(); // Fetch the poem title from the URL parameters
   const [poem, setPoem] = useState(null);
   const [SelectedTab, setSelectedTab] = useState("reading");
   const { background, font } = useSettings();
+  const { onOpen } = useDisclosure();
 
   const navigate = useNavigate();
 
@@ -35,22 +46,22 @@ const Poem = () => {
   }, [title]);
 
   const handleClickAuthor = () => {
-    navigate(`/author/${poem.author}`);
+    navigate(`/author/${poem.author}`); //view poems by author
   };
 
   return (
     <Card
       className="container mx-auto px-4 py-8 h-full"
-      style={{ backgroundColor: "transparent", fontFamily: font }}
+      style={{ backgroundColor: background, fontFamily: font }}
       radius="md"
     >
-   
       <Tabs
         aria-label="Dynamic tabs"
-        className="w-full justify-between"
+        className="w-full h-full justify-between"
         selectedKey={SelectedTab}
         onSelectionChange={setSelectedTab}
       >
+        {/* Tab for return home & possible ads */}
         <Tab
           key="back"
           title={<MdArrowBack size={16} onClick={() => navigate(-1)} />}
@@ -86,10 +97,11 @@ const Poem = () => {
         </Tab>
 
         <Tab key="reading" title="Reading Mode">
+          {/* render poem with clickable autor name */}
           {poem ? (
             <div className="flex flex-col w-full h-full gap-0 poemText">
               <h1 className="text-2xl font-bold mt-8">{poem.title}</h1>
-              <p className="text-lg" onClick={handleClickAuthor}>
+              <p className="text-lg underline" onClick={handleClickAuthor}>
                 By {poem.author}
               </p>
               <p className="text-small font-light">{poem.lines.length} Lines</p>
@@ -102,17 +114,35 @@ const Poem = () => {
               </div>
               <Divider />
               <p className="text-center my-4">End of Poem</p>
+              <div className="flex gap-4 justify-between my-8">
+                <Button
+                  isIconOnly
+                  color="danger"
+                  className="w-10 h-10 shadow-md bg-black/90"
+                >
+                  {" "}
+                  <MdBookmarkBorder size={24} />
+                </Button>
+
+                <WriteReviewModal />
+
+                <ShareButton
+                  shareUrl={`https://whatpoem.vercel.app/poem/${title}`}
+                />
+              </div>
             </div>
           ) : (
-            <CircularProgress color="default" aria-label="Loading..." />
+            <div className="flex w-full justify-center items-center top-0 right-0 bg-black">
+              {/* loading icon while fetching poem */}
+              <CircularProgress color="default" aria-label="Loading..." />
+            </div>
           )}
         </Tab>
+        {/* Reviews tab after adding user auth functions & features */}
         <Tab key="writing" title="Reviews">
-          <p>Reviews</p>
+          <p className="text-center">Reviews coming soon...</p>
         </Tab>
-        <Tab key="settings" title={ <SettingsModal />}>
-         
-        </Tab>
+        <Tab key="settings" title={<SettingsModal onPress={onOpen} />}></Tab>
       </Tabs>
       {/* button to scroll smoothly to the top */}
       <div className="flex w-auto h-dvh justify-end absolute">
